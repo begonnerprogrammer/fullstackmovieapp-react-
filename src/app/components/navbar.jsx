@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 import Link from 'next/link';
-import Mobnav from '../components/mobnav';
+import Mobnav from './mobnav';
 import Image from 'next/image';
 import { signIn,signOut, useSession } from 'next-auth/react';
 
@@ -15,7 +15,7 @@ const Navbar = ({movie}) => {
 
     const router=useRouter();
 
-    const handlesubmit=(e:React.FormEvent)=>{
+    const handlesubmit=(e)=>{
          e.preventDefault();
          setInput("");
          router.push(`/search/${input}?page=1`)
@@ -39,7 +39,7 @@ placeholder='Search For Movie'/>
 </button>
 </form>
 {
-  session? <div className=' justify-center align-center'> <div className='flex  justify-center align-center'><h1 className='md:mr-2 md:text-xl hidden md:block'>Hello!{session?.user?.name}</h1><Image onClick={()=>{signOut()}} height={24} width={24} className='sm:h-2 w-2 md:h-6 w-6' src={session?.user?.image} alt="" /></div><button className='hidden md:block border-2 border-white md:p-1 sm:text-[5px] md:text-[12px] '  onClick={()=>{signOut()}}>Signout</button></div> :<button className='border-2 border-white p-1 rounded-sm hover:p-2  transform duration-300 ease-in-out '   onClick={()=>{signIn("google")}}>Signin</button>
+  session? <div className=' justify-center align-center'> <div className='flex  justify-center align-center'><h1 className='md:mr-2 md:text-xl hidden md:block'>Hello!{session?.user?.name}</h1><Image onClick={()=>{signOut()}} height={24} width={24} className='sm:h-2 sm:w-2 md:h-6 md:w-6' src={session?.user?.image} alt="" /></div><button className='hidden md:block border-2 border-white md:p-1 sm:text-[5px] md:text-[12px] '  onClick={()=>{signOut()}}>Signout</button></div> :<button className='border-2 border-white p-1 rounded-sm hover:p-2  transform duration-300 ease-in-out '   onClick={()=>{signIn("google")}}>Signin</button>
 }
 <Mobnav  input={input} setInput={setInput} handlesubmit={handlesubmit}/>
 

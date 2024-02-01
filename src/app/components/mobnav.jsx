@@ -8,22 +8,12 @@ import { IoMdClose } from "react-icons/io";
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
 import { signIn,signOut, useSession } from 'next-auth/react';
-interface propsType{
-    input :string,
-    setInput:Dispatch<SetStateAction<String>>,
-    handlesubmit: (e:React.FormEvent) => void
-}
 
 
-interface Igenre{
-  id:string,
-  name:string
-}
-export interface reduxvalue{
-  state:any;
-  cart:any
-}
-const Mobnav = ({input,setInput,handlesubmit}:propsType) => {
+
+
+
+const Mobnav = ({input,setInput,handlesubmit}) => {
   const {data:session}=useSession();
   // state to close and open mebilemenu
     const [isopen,setIsopen]=useState(false);
@@ -31,7 +21,7 @@ const Mobnav = ({input,setInput,handlesubmit}:propsType) => {
     const [selectedGenre,setSelectedGenre]=useState("");
      const Params=useParams();
      const searchParams=useSearchParams();
-     const addmovie=useSelector((state:reduxvalue)=>state.cart)
+     const addmovie=useSelector((state)=>state.cart)
 //Fetching data
 useEffect(()=>{
 axios.get(`${BASE_URL}/genre/movie/list?api_key=d6661b84debe28a2b041dd58f1f45470&language=en-US`)
@@ -46,7 +36,7 @@ axios.get(`${BASE_URL}/genre/movie/list?api_key=d6661b84debe28a2b041dd58f1f45470
 //getting params to get current genre
 useEffect(()=>{
 if(searchParams.get("genre")){
-  setSelectedGenre(searchParams.get("genre")!);
+  setSelectedGenre(searchParams.get("genre")); //!
   return;
 }
 
@@ -133,7 +123,7 @@ onClick={()=>setIsopen(false)}>
 <div className='flex flex-col gap-4 pt-4'>
   <p className='sidebarTitle'>generes</p>
   {
-    genre.map((genre:Igenre) => (<Link key={genre.id} href={`/genres/${genre.id}?genre=${genre.name.toLocaleLowerCase()}` } className='w-fit' onClick={()=>{setIsopen(false)}}>
+    genre.map((genre) => (<Link key={genre.id} href={`/genres/${genre.id}?genre=${genre.name.toLocaleLowerCase()}` } className='w-fit' onClick={()=>{setIsopen(false)}}>
       <p className={`sidebarLink ${genre.name.toLowerCase() === selectedGenre ? "sidebarActive" : "" }`}>{genre.name}
       </p>
       </Link>
