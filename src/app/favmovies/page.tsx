@@ -2,7 +2,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Card from "../components/card"
-import Favmovies from '../components/favmovie';
+
 import { remove } from '../Redux/movieslice';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -16,12 +16,18 @@ export interface Imovie{
   movie:any;
 }
 
+export interface reduxvalue{
+  state:any;
+  cart:any
+}
+
+
 
 const Page = () => {
   const dispatch=useDispatch();
-  const movie=useSelector((state)=>state.cart);
+  const movie=useSelector((state:reduxvalue)=>state.cart);
 
-const handleremove=(id)=>{
+const handleremove=(id:any)=>{
    dispatch(remove(id))
 }
 console.log(movie)
@@ -33,9 +39,8 @@ console.log(movie.backdrop_path)
        <div className= 'grid gap-4 moviesGrid place-items-center  bg-secondary max-h-[calc(100vh-77px)] min-h-[calc(100vh-72px)] p-2 overflow-y-scroll overflow-x-hidden scrollbar-thin scrollbar-thumb=[#222222a] scrollbar-track-primary relative'>
       {
 movie.map((movie:Imovie)=>(
-<div>
-<Card
-      key={movie.id}
+<div key={movie.id}>
+<Card 
       img={movie.poster_path}
       id={movie.id}
       title={movie.title}
