@@ -1,7 +1,11 @@
+
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-
+import Navbar from './components/navbar'
+import Sidbar from './components/sidbar'
+import Provider from "../../src/app/Redux/prvider"
+import SessionProvider from './provider/SessionProvider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -16,7 +20,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <SessionProvider>
+        <Provider>
+        <Navbar/>
+        <div className="grid grid-cols-1 sm:grid-cols-[300px,1fr]">
+          <Sidbar/>
+          {children}
+        </div>
+        </Provider>
+        </SessionProvider>
+        </body>
     </html>
   )
 }
