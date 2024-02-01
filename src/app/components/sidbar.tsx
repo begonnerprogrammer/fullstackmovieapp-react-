@@ -5,12 +5,17 @@ import axios from 'axios';
 import { BASE_URL } from '../utils/const';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
+export interface states{
+  state:any;
+  cart:any;
+}
 const Sidbar = () => {
+ 
     const [genres,setGenres]=useState([]);
     const [selectedGenre,setSelectedGenre]=useState("");
     const params=useParams();
     const searchParams=useSearchParams();
-    const addmovie=useSelector((state)=>state.cart)
+    const addmovie=useSelector((state:states)=>state.cart)
 
 interface Igenre{
     id:string,
