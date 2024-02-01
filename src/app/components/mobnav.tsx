@@ -19,7 +19,10 @@ interface Igenre{
   id:string,
   name:string
 }
-
+export interface reduxvalue{
+  state:any;
+  cart:any
+}
 const Mobnav = ({input,setInput,handlesubmit}:propsType) => {
   const {data:session}=useSession();
   // state to close and open mebilemenu
@@ -28,7 +31,7 @@ const Mobnav = ({input,setInput,handlesubmit}:propsType) => {
     const [selectedGenre,setSelectedGenre]=useState("");
      const Params=useParams();
      const searchParams=useSearchParams();
-     const addmovie=useSelector((state)=>state.cart)
+     const addmovie=useSelector((state:reduxvalue)=>state.cart)
 //Fetching data
 useEffect(()=>{
 axios.get(`${BASE_URL}/genre/movie/list?api_key=d6661b84debe28a2b041dd58f1f45470&language=en-US`)
