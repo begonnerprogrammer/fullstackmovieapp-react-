@@ -16,16 +16,13 @@ export interface Imovie{
   movie:any;
 }
 
-export interface reduxvalue{
-  state:any;
-  cart:any
-}
+
 
 
 
 const Page = () => {
   const dispatch=useDispatch();
-  const movie=useSelector((state:reduxvalue)=>state.cart);
+  const movie=useSelector((state)=>state.cart);
 
 const handleremove=(id:any)=>{
    dispatch(remove(id))
@@ -37,7 +34,7 @@ console.log(movie.backdrop_path)
     {
       movie.length===0 ? <div className='text-white   md:absolute top-28 left-[600px] text-2xl'><h1>Add movies first</h1> <Link href={"/"}><button className='border-2 border-zinc-300 text-white p-1 ml-5 mt-2 hover:p-2  transition-all duration-300 ease-in-out'>Add movies</button></Link></div> :
        <div className= 'grid gap-4 moviesGrid place-items-center  bg-secondary max-h-[calc(100vh-77px)] min-h-[calc(100vh-72px)] p-2 overflow-y-scroll overflow-x-hidden scrollbar-thin scrollbar-thumb=[#222222a] scrollbar-track-primary relative'>
-      {
+      {/* {
 movie.map((movie:Imovie)=>(
 <div key={movie.id}>
 <Card 
@@ -51,8 +48,26 @@ movie.map((movie:Imovie)=>(
 </div>
 
 ))
-}
+} */}
+{movie.map((movie)=>(
+  <>
+  <div>
+
+ 
+  <Link href={`/details/${movie.id}`}>
+  <div>
+      <img src={`${BASE_IMG_URL}${movie.poster_path}`}  alt=""/>
+      <h1>{movie.title}</h1>
+  </div>
+  </Link>
+  <button className='border-2 border-white p-1 rounded-sm hover:p-2  transform duration-300 ease-in-out ' onClick={()=>(handleremove(movie.id))} >Remove</button>
+  </div>
+  </>
+))
+
+    }
 </div>
+
     }
  
 
