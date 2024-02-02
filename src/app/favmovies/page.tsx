@@ -22,7 +22,7 @@ export interface Imovie{
 
 const Page = () => {
   const dispatch=useDispatch();
-  const movie=useSelector((state)=>state.cart);
+  const movie=useSelector((state:any)=>state.cart);
 
 const handleremove=(id:any)=>{
    dispatch(remove(id))
