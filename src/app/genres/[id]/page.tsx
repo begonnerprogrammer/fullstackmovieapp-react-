@@ -89,6 +89,7 @@ const Page = () => {
           id={movie.id}
           title={movie.title}
           release_Date={movie.release_date}
+          movie={movie}
           />))
               }
          </div>
