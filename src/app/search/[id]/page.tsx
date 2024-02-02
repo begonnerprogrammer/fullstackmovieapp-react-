@@ -8,6 +8,13 @@ import { useParams, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react'
 
+export interface Imovie{
+  id:string;
+  poster_path:string;
+  title:string;
+  release_date:string;
+  movie:any;
+}
 const Page = () => {
 
 
@@ -95,6 +102,7 @@ const Page = () => {
       id={movie.id}
       title={movie.title}
       release_Date={movie.release_date}
+      movie={movie}
       />))
           }
      </div>
