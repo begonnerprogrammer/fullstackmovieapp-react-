@@ -6,15 +6,12 @@ import Mobnav from './mobnav';
 import Image from 'next/image';
 import { signIn,signOut, useSession } from 'next-auth/react';
 
-const Navbar = ({movie}) => {
+const Navbar = () => {
   const {data:session}=useSession();
   console.log(session)
-  console.log(movie)
- 
+
     const [input,setInput]=useState("");
-
     const router=useRouter();
-
     const handlesubmit=(e)=>{
          e.preventDefault();
          setInput("");
